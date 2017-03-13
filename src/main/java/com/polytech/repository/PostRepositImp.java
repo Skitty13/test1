@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Utilisateur on 13/03/2017.
  */
-public class PostRepository {
+public class PostRepositImp implements PostReposit {
 
     List<Post> db = new ArrayList<Post>();
 

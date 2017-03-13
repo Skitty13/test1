@@ -1,6 +1,7 @@
 package com.polytech.business;
 
-import com.polytech.repository.PostRepository;
+import com.polytech.repository.PostReposit;
+import com.polytech.repository.PostRepositImp;
 
 import java.util.List;
 
@@ -9,9 +10,9 @@ import java.util.List;
  */
 public class PublicationService {
 
-    private PostRepository postRepository;
+    private PostReposit postRepository;
 
-    public PublicationService(PostRepository repository) {
+    public PublicationService(PostReposit repository) {
         this.postRepository = repository;
     }
 
