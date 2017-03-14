@@ -1,0 +1,4 @@
+CREATE TABLE POST(
+            ID INT PRIMARY key AUTO_INCREMENT,
+            CONTENT VARCHAR (140)
+    );

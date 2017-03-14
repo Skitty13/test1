@@ -2,12 +2,15 @@ package com.polytech.config;
 
 import com.polytech.business.PublicationService;
 import com.polytech.business.PublicationServiceImp;
+import com.polytech.repository.JdbcPostReposit;
 import com.polytech.repository.PostReposit;
-import com.polytech.repository.PostRepositImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import static javax.security.auth.login.Configuration.configuration;
+import javax.sql.DataSource;
+
 
 /**
  * Created by Utilisateur on 13/03/2017.
@@ -17,8 +20,14 @@ import static javax.security.auth.login.Configuration.configuration;
 public class ApplicationConfig {
 
     @Bean
+    public DataSource dataSource(){
+        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("create-schema.sql").build();
+    }
+
+    @Bean
     public PostReposit postRepository(){
-        return new PostRepositImp();
+
+        return new JdbcPostReposit(dataSource());
     }
 
     @Bean
