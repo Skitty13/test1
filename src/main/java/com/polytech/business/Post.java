@@ -7,6 +7,9 @@ public class Post {
 
     private String content;
 
+    public Post(){
+    }
+
     @Override
     public String toString() {
         return "Post{" +

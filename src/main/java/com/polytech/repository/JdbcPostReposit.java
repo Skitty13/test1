@@ -1,6 +1,8 @@
 package com.polytech.repository;
 
 import com.polytech.business.Post;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,6 +17,7 @@ import java.util.List;
  */
 
 
+@Repository
 public class JdbcPostReposit implements PostReposit {
 
     private final DataSource dataSource;
@@ -23,15 +26,14 @@ public class JdbcPostReposit implements PostReposit {
         this.dataSource = dataSource;
     }
 
-
     public List<Post> findAll() {
-        List<Post> posts= new ArrayList<Post>();
+        List<Post> posts = new ArrayList<Post>();
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
             PreparedStatement preparedstatement = connection.prepareStatement(" SELECT * FROM POST");
             ResultSet resultSet = preparedstatement.executeQuery();
-            while ( resultSet.next()){
+            while (resultSet.next()) {
                 posts.add(new Post(resultSet.getString("CONTENT")));
             }
 
@@ -41,17 +43,18 @@ public class JdbcPostReposit implements PostReposit {
         return posts;
     }
 
-    public void save(Post post){
-            try {
-                Connection connection = dataSource.getConnection();
-                PreparedStatement preparedstatement = connection.prepareStatement(" INSERT INTO POST (CONTENT) VALUES(?)");
-                preparedstatement.setString(1, post.getContent());
-                preparedstatement.execute();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    public void save(Post post) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedstatement = connection.prepareStatement(" INSERT INTO POST (CONTENT) VALUES(?)");
+            preparedstatement.setString(1, post.getContent());
+            preparedstatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
     }
+}
 
 
 

@@ -1,15 +1,8 @@
 package com.polytech.config;
 
-import com.polytech.business.PublicationService;
-import com.polytech.business.PublicationServiceImp;
-import com.polytech.repository.JdbcPostReposit;
-import com.polytech.repository.PostReposit;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-
-import javax.sql.DataSource;
+import org.springframework.context.annotation.Import;
 
 
 /**
@@ -17,22 +10,21 @@ import javax.sql.DataSource;
  */
 
 @Configuration
+@Import({InfrastructureConfig.class, WebConfig.class})
+@ComponentScan(basePackages= "com.polytech")
+
 public class ApplicationConfig {
 
+/*
     @Bean
-    public DataSource dataSource(){
-        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("create-schema.sql").build();
-    }
+    public PostReposit postRepository(DataSource dataSource){
 
-    @Bean
-    public PostReposit postRepository(){
-
-        return new JdbcPostReposit(dataSource());
+        return new JdbcPostReposit(dataSource);
     }
 
     @Bean
     public PublicationService publicationService ( PostReposit postReposit){
 
         return new PublicationServiceImp(postReposit);
-    }
+    }*/
 }
